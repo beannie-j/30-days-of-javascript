@@ -12,6 +12,68 @@ function isNumeric(str) {
     return !isNaN(str) && !isNaN(parseFloat(str));
 }
 
+function calc(prev, tempOperator, curr) {
+    switch (tempOperator) {
+        case "×":
+            computedValue = prev * curr;
+            break;
+        case "+":
+            computedValue = prev + curr;
+            break;
+        case "-":
+            computedValue = prev - curr;
+            break;
+        case "÷":
+            computedValue = prev / curr;
+            break;
+        case "%":
+            computedValue = prev % curr;
+            break;
+    }
+    return computedValue;
+}
+
+
+function calculateBracketsValue(tempArr) {
+    let computedValue = 0;
+    let prev = parseFloat(tempArr[0]);
+    let curr = 0;
+    let prevOperator = "";
+        
+    for (let i = 1; i < tempArr.length; i++) {
+        if (isNumeric(tempArr[i])) {
+            curr = parseFloat(tempArr[i]);
+            console.log(curr);
+            switch (prevOperator) {
+                case "×":
+                    computedValue = prev * curr;
+                    prev = computedValue;
+                    break;
+                case "+":
+                    computedValue = prev + curr;
+                    prev = computedValue;
+                    break;
+                case "-":
+                    computedValue = prev - curr;
+                    prev = computedValue;
+                    break;
+                case "÷":
+                    computedValue = prev / curr;
+                    prev = computedValue;
+                    break;
+                case "%":
+                    computedValue = prev % curr;
+                    prev = computedValue;
+                    break;
+                }
+            }   
+        else {
+            prevOperator = tempArr[i];
+        }   
+    }
+    return computedValue;
+}
+
 class Calculator {
     constructor(previousOperandTextElement, currentOperandTextElement) {
         this.previousOperandTextElement = previousOperandTextElement;
@@ -64,7 +126,6 @@ class Calculator {
     appendOpenBracket(bracket) {
         const functionToEvaluate = this.currentOperand;
         let arr = functionToEvaluate.split(" ");
-        console.log(arr);
 
         function isOperand(operand) {
             if (operand == '×') return true;
@@ -83,9 +144,7 @@ class Calculator {
     appendCloseBracket(bracket) {
         const functionToEvaluate = this.currentOperand;
         let arr = functionToEvaluate.split(" ");
-        console.log(arr);
         let last = arr[arr.length - 1];
-        console.log("last elem " + last);
         if (isNumeric(last) && this.isBracketOpen) {
             this.isBracketClose = true;
             this.currentOperand = this.currentOperand.toString() + " " + bracket + " ";
@@ -94,8 +153,7 @@ class Calculator {
         }   
     }
 
-    render() { 
-        console.log("innerText: " + this.currentOperandTextElement.value);
+    render() {
     }
 
     update() {
@@ -106,50 +164,76 @@ class Calculator {
     compute() {
         const functionToEvaluate = this.currentOperand;
         let arr = functionToEvaluate.split(" ");
+        
+        for(let i = 0; i < arr.length; i++){ 
+            if (arr[i] === "" || arr[i] === " ") { 
+                arr.splice(i, 1); 
+            }
+        }
+        
         console.log(arr);
+
         let computedValue = 0;
         let prev = parseFloat(arr[0]);
         let curr = 0;
         let prevOperator = "";
         
         for (let i = 1; i < arr.length; i++) {
-            console.log(prev);
-            console.log(curr);
-            if (arr[i] === "" || arr[i] === " ") continue;
             if (isNumeric(arr[i])) {
                 curr = parseFloat(arr[i]);
-                console.log("curr " + curr);
+                console.log(curr);
                 switch (prevOperator) {
                     case "×":
                         computedValue = prev * curr;
                         prev = computedValue;
-                        console.log("val " + computedValue);
                         break;
                     case "+":
                         computedValue = prev + curr;
                         prev = computedValue;
-                        console.log("val " + computedValue);
                         break;
                     case "-":
                         computedValue = prev - curr;
                         prev = computedValue;
-                        console.log("val " + computedValue);
                         break;
                     case "÷":
                         computedValue = prev / curr;
                         prev = computedValue;
-                        console.log("val " + computedValue);
                         break;
                     case "%":
                         computedValue = prev % curr;
                         prev = computedValue;
-                        console.log("val " + computedValue);
+                        break;
+                    case "(":
+                        let tempOperator = arr[i-2];
+                        let tempArr= [];
+                        let end = 0;
+                        console.log("temp " + tempOperator);
+                        for (let j = i; j < arr.length; j++)
+                        {
+                            console.log(arr[j]);
+                            tempArr.push(arr[j]);
+                            if (arr[j] == ")")
+                            {   
+                                tempArr.pop();
+                                end = j;
+                                console.log(tempArr);
+                                let computedBracketsValue = calculateBracketsValue(tempArr);
+                                curr = computedBracketsValue;
+                                console.log("brac " + curr);
+                                computedValue = calc(prev, tempOperator, curr);
+                                console.log("computed value " + computedValue);
+                                prev = computedValue;
+                                break;
+                            }
+                        }
+                        i = end;
+                        console.log(arr);
+                        console.log(arr[i]);
                         break;
                 }
             }
             else {
                 prevOperator = arr[i];
-                console.log(prevOperator);
             }
         }
         console.log(functionToEvaluate);
@@ -175,7 +259,6 @@ operationButtons.forEach(button => {
     if (this.currentOperand == "") return;
     button.addEventListener('click', () => {
         let operator = button.innerText;
-        console.log(operator);
         calculator.chooseOperation(operator);
         calculator.update();
         calculator.render();
@@ -197,7 +280,6 @@ clearButton.addEventListener('click', button => {
 });
 
 openBracketButton.addEventListener('click', button => {
-    console.log("opening bracket");
     calculator.appendOpenBracket("(");
     calculator.update();
     calculator.render();
@@ -205,7 +287,6 @@ openBracketButton.addEventListener('click', button => {
 
 closeBracketButton.addEventListener('click', button => {
     if (!calculator.isBracketOpen) return;
-    console.log("closing bracket");
     calculator.appendCloseBracket(")");
     calculator.update();
     calculator.render();
