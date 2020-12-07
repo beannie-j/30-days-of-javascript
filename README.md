@@ -8,4 +8,5 @@ To explore the Javascript language I started with a basic calculator.
 ![](res/simple-calculator.gif)
 
 #### Day 2
-On day 2, I made a shopping cart like the one in the Apple Store.
+On day 2, I made a basic shopping cart like the one in the Apple Store.
+![](res/shopping-cart.gif)

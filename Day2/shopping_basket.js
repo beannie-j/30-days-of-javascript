@@ -19,10 +19,6 @@ qtyDropDowns.forEach(button => {
         let selectedQty = qty.options[qty.selectedIndex].value;
         let price = items.get(itemName).price;
 
-        console.log(price);
-        console.log(qty);
-        console.log(itemName);
-
         updatePricePerQuantity(price, selectedQty, event.target.parentElement.parentElement);   
     });
 });
@@ -61,8 +57,8 @@ function updateItemsTotal() {
         let price = item.getElementsByClassName("item-price")[0];
         let quantity = item.getElementsByClassName("quantity")[0].value;
         let priceValue = price.innerText.toString().substring(1);
-        let sum = quantity * priceValue;
-        total += sum;
+        console.log(priceValue);
+        total += parseFloat(priceValue);
     }
     total = "$" + total;
     document.getElementsByClassName("sub-total")[0].innerText = total;
@@ -94,13 +90,8 @@ function updateTotalPrice() {
 }
 
 function updatePricePerQuantity(price, qty, parent) {
-    console.log(price);
-    console.log(qty);
     let total = price * qty;
-    console.log(total);
-
     total = "$" + total;
-    console.log(total);
     parent.getElementsByClassName("item-price")[0].innerText = total;
 
     updateItemsTotal();
