@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Shopping Basket</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="shopping_basket_style.css">
+        <script src="shopping_basket.js" async></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="title">Shopping Basket</div>
+            <div class="cart-items">
+                <!-- item 1-->
+                <div class="item">
+                    <div class="item-description">
+                        <img src="img/iphone-case.jpg" alt="iphone" width="130" height="130">
+                        <span class="item-name">iPhone 12 mini Silicone Case with MagSafe - Cyprus Green</span>
+                        <span class="drop-down-quantity">
+                            <label for="quantity">Qty:</label>
+                            <select class="quantity qty-number" name="quantity">
+                                <option value="0">0 (Delete)</option>
+                                <option selected value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </span>
+                        <span class="item-price" value="49">$49</span>
+                    </div>
+                    <button class="like-button">
+                        <img src="img/heart-clear.png" width="16" height="16" alt=""/>
+                    </button>
+                    <button class="save-for-later-button">Save for later</button>
+                    <button class="delete-button">Delete</button>
+                </div>
+                <!-- item 2-->
+                <div class="item">
+                    <div class="item-description">
+                        <img src="img/apple-watch.jpg" alt="apple-watch" width="130" height="130">
+                        <span class="item-name">Apple Watch Series 6 GPS, 40mm Gold Aluminium Case with Cream Sport Loop</span>
+                        <span class="drop-down-quantity">
+                            <label for="quantity">Qty:</label>
+                            <select class="quantity qty-number" name="quantity">
+                                <option value="0">0 (Delete)</option>
+                                <option selected value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </span>
+                        <span class="item-price">$379</span>
+                    </div>
+                    <button class="like-button">
+                        <img src="img/heart-clear.png" width="16" height="16" alt=""/>
+                    </button>
+                    <button class="save-for-later-button">Save for later</button>
+                    <button class="delete-button">Delete</button>
+                </div>
+                <!-- item 3-->
+                <div class="item">
+                    <div class="item-description">
+                        <img src="img/iphone-12-black.png" alt="watch" width="130" height="130">
+                        <span class="item-name">iPhone 12 mini 128GB Black</span>
+                        <span class="drop-down-quantity">
+                            <label for="quantity">Qty:</label>
+                            <select class="quantity qty-number" name="quantity">
+                                <option value="0">0 (Delete)</option>
+                                <option selected value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>  
+                        </span>
+                        <span class="item-price">$749</span>
+                    </div>
+                    <button class="like-button">
+                        <img src="img/heart-red.png" width="16" height="16" alt=""/>
+                    </button>
+                    <button class="save-for-later-button">Save for later</button>
+                    <button class="delete-button">Delete</button>
+                </div>
+        
+            </div>
+
+            <!-- price -->
+            <div class="price">
+                <div>
+                    <span>Subtotal</span>
+                    <span class="sub-total" value=0>$0</span>
+                </div>
+
+                <div>
+                    <span>Shipping</span>
+                    <span class="shipping" value=0>$0</span>
+                </div>
+
+                <div>
+                    <span>Total</span>
+                    <span class="total-value" value=0>$0</span>
+                </div>
+            </div>
+
+            <!-- Favourites -->
+            <div class="title favourites">Favourites</div>
+            <div class="item favourites">
+                <div class="item-description">
+                    <img src="img/iphone-case.jpg" alt="iphone" width="130" height="130">
+                    <span class="item-name">iPhone 12 mini Silicone Case with MagSafe - Cyprus Green</span>
+                    <span class="item-price">$49</span>
+                </div>
+                <button class="move-to-basket-button">Move to Basket</button>
+                <button class="delete-button">Delete</button>    
+            </div>
+
+            <!-- Saved for later -->
+            <div class="title save-for-later">Saved for later</div>
+            <div class="item save-for-later">
+                <div class="item-description">
+                    <img src="img/ipad.jpg" alt="ipad" width="130" height="130">
+                    <span class="item-name">10.2-inch iPad Wi-Fi + Cellular 128GB - Space Grey</span>
+                    <span class="item-price">$49</div>
+                </div>
+                <button class="move-to-basket-button">Move to Basket</button>
+                <button class="delete-button">Delete</button> 
+            </div>
+        </div>
+    </body>
+</html>

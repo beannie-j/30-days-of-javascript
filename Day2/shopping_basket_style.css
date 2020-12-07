@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+.container {
+    border: 5px solid #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.title {
+    font-size: 20px;
+}
+
+.cart-items {
+    border: 5px solid #fff;
+}
+.item {
+    border: 5px solid #fff;
+}
+
+.item-description {
+    border: 5px solid #fff;
+}
+
+.item-description .item-price{
+    position: absolute;
+    border: 3px solid #fff;
+    right: 110px;
+    margin-top: 55px;
+}
+
+.item-description .item-name{
+    border: 3px solid #fff;
+    position: absolute;
+    margin-top: 55px;
+}
+
+.drop-down-quantity {
+    border: 5px solid #fff;
+    position: relative;
+    margin-right: 150px;
+}
+
+.drop-down-quantity .quantity {
+    border: 5px solid #fff; 
+}
+
+.price {
+    position: relative;
+    top: 20px;
+}
+
+.favourites {
+    position: relative;
+    top: 40px;
+}
+
+.sub-total {
+    position: absolute;
+    right: 110px;
+}
+
+.shipping {
+    position: absolute;
+    right: 110px;
+}
+
+.total-value {
+    position: absolute;
+    right: 110px;
+}
+
+.like-button {
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    position: absolute;
+    margin-left: 300px;
+    margin-top: -25px;
+}
+
+.save-for-later-button {
+    position: absolute;
+    margin-top: -28px;
+    margin-left: 350px;
+}
+
+.delete-button {
+    position: absolute;
+    margin-top: -28px;
+    margin-left: 450px;
+}
+
+.save-for-later {
+    position: relative;
+}
