@@ -5,14 +5,24 @@ const qtyDropDowns = document.querySelectorAll(".qty-number");
 
 likeButtonArray = new Array('img/heart-red.png', 'img/heart-clear.png');
 
+let items = new Map();
+items.set('iPhone 12 mini Silicone Case with MagSafe - Cyprus Green', {price: 49});
+items.set('Apple Watch Series 6 GPS, 40mm Gold Aluminium Case with Cream Sport Loop', {price: 379});
+items.set('iPhone 12 mini 128GB Black', {price: 749});
+
+
 qtyDropDowns.forEach(button => {
     button.addEventListener('change', function(event) {
         let parent = event.target.parentElement.parentElement;
-        let price = parent.getElementsByClassName("item-price")[0].innerHTML.substring(1);
-        console.log("price " + price);
+        let itemName = parent.getElementsByClassName('item-name')[0].innerHTML;
         let qty = parent.getElementsByClassName("qty-number")[0];
         let selectedQty = qty.options[qty.selectedIndex].value;
-        console.log(selectedQty);
+        let price = items.get(itemName).price;
+
+        console.log(price);
+        console.log(qty);
+        console.log(itemName);
+
         updatePricePerQuantity(price, selectedQty, event.target.parentElement.parentElement);   
     });
 });
@@ -84,9 +94,18 @@ function updateTotalPrice() {
 }
 
 function updatePricePerQuantity(price, qty, parent) {
+    console.log(price);
+    console.log(qty);
     let total = price * qty;
+    console.log(total);
+
     total = "$" + total;
+    console.log(total);
     parent.getElementsByClassName("item-price")[0].innerText = total;
+
+    updateItemsTotal();
+    updateShipping();
+    updateTotalPrice();
 }
 
 updateItemsTotal();
