@@ -1,11 +1,43 @@
 const SHIPPING_FEE = 3.99;
 const deleteButtons = document.querySelectorAll(".delete-button");
+const likeButtons = document.querySelectorAll(".like-button");
+const qtyDropDowns = document.querySelectorAll(".qty-number");
+
+likeButtonArray = new Array('img/heart-red.png', 'img/heart-clear.png');
+
+qtyDropDowns.forEach(button => {
+    button.addEventListener('change', function(event) {
+        let parent = event.target.parentElement.parentElement;
+        let price = parent.getElementsByClassName("item-price")[0].innerHTML.substring(1);
+        console.log("price " + price);
+        let qty = parent.getElementsByClassName("qty-number")[0];
+        let selectedQty = qty.options[qty.selectedIndex].value;
+        console.log(selectedQty);
+        updatePricePerQuantity(price, selectedQty, event.target.parentElement.parentElement);   
+    });
+});
 
 deleteButtons.forEach(button => {
     button.addEventListener('click', function(event) {
         let buttonClicked = event.target;
         buttonClicked.parentElement.remove();
         updateItemsTotal();
+    });
+});
+
+likeButtons.forEach(button => {
+    button.addEventListener('click', function(event) {
+        let likeButtonClicked = event.target;
+        let likeButtonClickedSrcStr = likeButtonClicked.src.toString();
+        if (likeButtonClickedSrcStr.includes("clear")) {
+            // add to favourite
+            event.target.src = "img/heart-red.png";
+            return;
+        }
+        if (likeButtonClickedSrcStr.includes("red")) {
+            event.target.src = "img/heart-clear.png";
+            return;
+        }
     });
 });
 
@@ -51,7 +83,10 @@ function updateTotalPrice() {
     document.getElementsByClassName("total-value")[0].innerText = total;
 }
 
-function updatePricePerQuantity() {
+function updatePricePerQuantity(price, qty, parent) {
+    let total = price * qty;
+    total = "$" + total;
+    parent.getElementsByClassName("item-price")[0].innerText = total;
 }
 
 updateItemsTotal();
