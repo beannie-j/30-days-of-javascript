@@ -32,20 +32,21 @@ class Ball {
     static factor = 0.9;    // velocity reduction factor per bounce  
     constructor() {
         this.radius = getRandomInt(15, 36);
-        this.x = getRandomInt(this.radius, windowWidth);
+        // this.x = getRandomInt(this.radius, windowWidth);
+        this.x = this.radius;
         this.y = this.radius;
         this.color = getRandomColor();
-        this.vx = 2;    // velocity of ball
+        this.vx = 1;    // velocity of ball
         this.vy = 0;
         this.isPaused = false;
         console.log("new ball created");
     }
 
     draw() {   
-        console.log("drawing ball");
+        ctx.clearRect(0, 0, windowWidth, windowHeight);
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
-        ctx.fillStyle = getRandomColor();
+        ctx.fillStyle = this.color;
         ctx.fill();
         ctx.stroke();
     }
@@ -57,31 +58,33 @@ class Ball {
         this.x += this.vx;
         this.y += this.vy;
         // handle bouncing
-        if (this.y > canvasHeight - this.radius) {
-            this.y = canvasHeight - this.radius;
+        if (this.y > windowHeight - this.radius) {
+            this.y = windowHeight - this.radius;
             this.vy *= -Ball.factor;
         }
 
-        if (this.x > canvasWidth + this.radius) {
+        if (this.x > windowWidth + this.radius) {
             this.x =- this.radius;
         }
-
-        this.draw();
     }
 }
 
 let balls = [];
-let ball = new Ball();
-ball.draw();
+for (let i = 0; i < 10; i++)
+{
+    balls.push(new Ball());
+}
 
-setInterval(() => {
-
-});
-
-function dropBall() {
-    ball.update();
-    requestAnimationFrame(dropBall)
+function animateBall() {
+    console.log("animating");
+    requestAnimationFrame(animateBall);
+    balls[0].update();
+    balls[0].draw();
 };
 
-dropBall();
+animateBall();
 
+setInterval(() => {
+    balls.push(new Ball());
+    balls.splice(0, 1);
+ }, 3000);
