@@ -10,26 +10,49 @@ const toDoForm = document.querySelector("#form");
 
 let deleteButtons = document.querySelectorAll(".delete-button");
 
+toDoList.addEventListener("click", deleteToDo);
+
+function deleteToDo(e) {
+  const item = e.target.closest("button");
+  const parent = item.parentElement;
+  console.log(parent);
+
+  //   if (item.parentElement) {
+
+  //   }
+  //   console.log(item.parentElement.parentElement);
+}
+
+// function deleteTodo(e) {
+//     const item = e.target;
+
+//     if (item.classList[0] === "trash-btn") {
+//       // e.target.parentElement.remove();
+//       const todo = item.parentElement;
+//       todo.classList.add("fall");
+//       //at the end
+//       removeLocalTodos(todo);
+//       todo.addEventListener("transitionend", e => {
+//         todo.remove();
+//       });
+//     }
+//     if (item.classList[0] === "complete-btn") {
+//       const todo = item.parentElement;
+//       todo.classList.toggle("completed");
+//       console.log(todo);
+//     }
+//   }
+
 function updateDeleteButtonsList() {
   console.log("updating buttons list");
   deleteButtons = document.querySelectorAll(".delete-button");
 
   deleteButtons.forEach((btn) => {
     btn.addEventListener("click", (event) => {
-      console.log(event.targetElement);
+      //   console.log("delete btn clicked");
+      //   console.log(event.currentTarget);
     });
   });
-
-  //   deleteButtons.addEventListener("click", function () {
-  //     console.log("You clicked: delete");
-  //   });
-
-  //   for (let i = 0; i < deleteButtons.length; i++) {
-  //     deleteButtons[i].addEventListener("click", function () {
-  //       console.log("You clicked: delete");
-  //       console.log(i);
-  //     });
-  //   }
 }
 
 function init() {
@@ -37,9 +60,9 @@ function init() {
 
   toDoButton.addEventListener("click", () => {
     let text = toDoInput.value;
-    tracker++;
     addToDoItem(text);
     updateDeleteButtonsList();
+    tracker++;
   });
 
   toDoForm.addEventListener("submit", (e) => {
@@ -49,7 +72,7 @@ function init() {
 
   function addToDoItem(text) {
     let div = document.createElement("div");
-    div.className = "todo-item";
+    div.className = `todo-item item${tracker}`;
 
     let label = document.createElement("label");
     label.htmlFor = `item${tracker}`;
